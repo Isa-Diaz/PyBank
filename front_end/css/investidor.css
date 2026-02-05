@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  margin: 0;
+}
+
+.navbar {
+  height: 64px;
+  background: linear-gradient(120deg, #6f42c1, #845ef7);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+}
+
+.logo span {
+  font-weight: 300;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.card {
+  background: white;
+  width: 360px;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card h2 {
+  margin: 0;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.grupo label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-weight: normal;
+}
+
+input[type="number"] {
+  height: 42px;
+  border-radius: 12px;
+  border: none;
+  background: #f1f3f6;
+  padding: 0 12px;
+}
+
+button {
+  height: 44px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(120deg, #6f42c1, #845ef7);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.95;
+}
+
+.msg {
+  font-size: 14px;
+  text-align: center;
+}

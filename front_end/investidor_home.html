@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home do Investidor - PyInvest</title>
+
+<link rel="stylesheet" href="css/investidor_home.css">
+
+</head>
+<body>
+
+<header class="navbar">
+  <h1 class="logo">Py<span>Invest</span></h1>
+</header>
+
+<main class="home-container">
+
+<div class="dashboard">
+
+<!-- TOPO -->
+<div class="topo">
+
+  <div>
+    <p>Patrimônio total</p>
+    <h2 id="patrimonio">R$ 0,00</h2>
+  </div>
+
+  <div class="perfil">
+    <p>Perfil</p>
+    <strong id="perfil">-</strong>
+  </div>
+
+</div>
+
+<!-- ABAS -->
+<div class="abas">
+
+  <button class="aba ativa" onclick="mostrarAba('resumo')">
+    Resumo
+  </button>
+
+  <button class="aba" onclick="mostrarAba('graficos')">
+    Gráficos
+  </button>
+
+  <button class="aba" onclick="mostrarAba('yfinance')">
+    YFinance
+  </button>
+
+</div>
+
+<!-- ================= RESUMO ================= -->
+<section id="aba-resumo" class="conteudo-aba ativa">
+
+<div class="grid-cards">
+
+<div class="card-dashboard">
+  <h4>Resumo da carteira</h4>
+
+  <div class="indicadores">
+
+    <div class="info-card">
+      <p>Rentabilidade</p>
+      <strong id="rentabilidade">0%</strong>
+    </div>
+
+    <div class="info-card">
+      <p>Projeção (12 meses)</p>
+      <strong id="projecao">R$ 0,00</strong>
+    </div>
+
+  </div>
+
+  <button class="btn btn-criar" onclick="novoInvestimento()">
+    + Criar investimento fixo
+  </button>
+
+</div>
+
+<div class="card-dashboard">
+  <h4>Meus investimentos</h4>
+
+  <p class="info-selecao">
+    Clique em um investimento para usar Guardar ou Resgatar
+  </p>
+
+  <div id="lista-investimentos"></div>
+
+</div>
+
+<div class="card-dashboard">
+
+  <h4>Guardar</h4>
+
+  <input type="number" id="valor-aporte" placeholder="Valor da aplicação" min="1">
+
+  <button class="btn btn-aporte" onclick="acaoAporte()">
+    Guardar
+  </button>
+
+</div>
+
+<div class="card-dashboard">
+
+  <h4>Resgatar</h4>
+
+  <input type="number" id="valor-resgate" placeholder="Valor do resgate" min="1">
+
+  <button class="btn btn-resgate" onclick="acaoResgate()">
+    Resgatar
+  </button>
+
+</div>
+
+</div>
+</section>
+
+<!-- ================= GRÁFICOS ================= -->
+<section id="aba-graficos" class="conteudo-aba">
+
+  <canvas id="graficoPatrimonio"></canvas>
+
+</section>
+
+<!-- ================= YFINANCE ================= -->
+<section id="aba-yfinance" class="conteudo-aba">
+
+<div class="grid-cards">
+
+<!-- ANALISAR ATIVO -->
+<div class="card-dashboard">
+
+  <h4>Análise de Ativos</h4>
+
+  <div style="display:flex; gap:10px;">
+    <input
+      type="text"
+      id="ticker"
+      placeholder="Ex: PETR4, AAPL, TSLA"
+    >
+
+    <button onclick="limparBusca()">❌</button>
+  </div>
+
+  <button class="btn btn-criar" onclick="buscarAtivo()">
+    Buscar ativo
+  </button>
+
+  <div class="indicadores">
+
+    <div class="info-card">
+      <p>Ativo selecionado</p>
+      <strong id="yf-nome">-</strong>
+    </div>
+
+    <div class="info-card">
+      <p>Preço</p>
+      <strong id="yf-preco">-</strong>
+    </div>
+
+    <div class="info-card">
+      <p>Variação 12M</p>
+      <strong id="yf-variacao">-</strong>
+    </div>
+
+  </div>
+
+  <canvas id="graficoYFinance"></canvas>
+
+</div>
+
+<!-- COMPRA -->
+<div class="card-dashboard">
+
+  <h4>Comprar Ação</h4>
+
+  <input
+    type="number"
+    id="valor-compra-acao"
+    placeholder="Valor para investir"
+  >
+
+  <button class="btn btn-aporte" onclick="comprarAcao()">
+    Comprar
+  </button>
+
+</div>
+
+<!-- VENDA -->
+<div class="card-dashboard">
+
+  <h4>Vender Ação</h4>
+
+<h3 id="acao-venda-nome">Selecione uma ação</h3>
+
+<input
+  type="number"
+  id="valor-venda-acao"
+  placeholder="Quantidade a vender"
+  min="1"
+/>
+
+<button class="btn btn-resgate" onclick="venderAcao()">
+  Vender
+</button>
+
+
+</div>
+
+<!-- LISTA AÇÕES -->
+<div class="card-dashboard">
+
+  <h4>Minhas Ações</h4>
+
+  <div id="lista-acoes"></div>
+
+</div>
+
+</div>
+</section>
+
+<!-- SAÍDA -->
+<div class="exit">
+
+  <button class="btn btn-voltar" onclick="voltarConta()">
+    ⬅ Conta corrente
+  </button>
+
+  <button class="btn btn-logout" onclick="logout()">
+    Sair
+  </button>
+
+</div>
+
+</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/investidor_home.js"></script>
+
+</body>
+</html>

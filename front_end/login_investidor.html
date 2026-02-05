@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Investidor - Py Invest</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/login_investidor.js" defer></script>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="logo">
+            <span class="py">Py</span><span class="invest">Invest</span>
+        </h1>
+
+        <p style="margin-bottom: 16px; color:#555;">
+            Área do Investidor
+        </p>
+
+        <input 
+          type="text" 
+          id="cpf" 
+          placeholder="CPF (somente números)" 
+          maxlength="11"
+        >
+
+        <button onclick="loginInvestidor()">Entrar</button>
+
+        <p class="erro" id="erro"></p>
+    </div>
+</div>
+
+</body>
+</html>

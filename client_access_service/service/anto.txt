@@ -1,0 +1,19 @@
+import requests
+
+MS1_URL = "http://localhost:5001"
+
+
+def buscar_cliente_por_cpf(cpf: str) -> dict:
+    try:
+        response = requests.get(f"{MS1_URL}/clientes/cpf/{cpf}")
+        return response.json()
+    except Exception as e:
+        return {"erro": str(e)}
+
+
+def criar_cliente_ms1(dados: dict) -> dict:
+    try:
+        response = requests.post(f"{MS1_URL}/clientes", json=dados)
+        return response.json()
+    except Exception as e:
+        return {"erro": str(e)}

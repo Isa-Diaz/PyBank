@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Alterar Senha - Py Invest</title>
+    <link rel="stylesheet" href="css/alterar_senha.css">
+    <script src="js/alterar_senha.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h2>Alterar Senha</h2>
+
+        <input type="password" id="senha_atual" placeholder="Senha atual">
+        <input type="password" id="nova_senha" placeholder="Nova senha">
+        <input type="password" id="confirmar_senha" placeholder="Confirmar nova senha">
+
+        <button onclick="alterarSenha()">Atualizar senha</button>
+
+        <button class="voltar" onclick="voltar()">Voltar</button>
+
+        <p id="msg"></p>
+    </div>
+</div>
+
+</body>
+</html>

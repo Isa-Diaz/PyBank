@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Py Invest</title>
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/home.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">Py<span>Bank</span></h1>
+
+    <div class="menu-container">
+        <button class="btn-sair-header" onclick="logout()">Sair</button>
+
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+        <div id="menu" class="menu">
+            <button onclick="irAtualizar()">Atualizar dados</button>
+            <button onclick="irAlterarSenha()">Alterar senha</button>
+            <button class="danger" onclick="deletarConta()">Deletar conta</button>
+        </div>
+    </div>
+</header>
+
+
+<main class="home-container">
+
+    <!-- LINHA 1 -->
+    <section class="linha">
+
+        <div class="card saldo-card">
+            <p>Saldo disponível</p>
+            <h2 id="saldo">R$ 0,00</h2>
+        </div>
+    
+
+ 
+
+    <div class="extra-card investidor-card" onclick="irInvestidor()">
+        <h3>Área de Investimentos</h3>
+
+        <p class="investidor-texto">
+            Ative sua conta investidora e comece a aplicar seu dinheiro com segurança.
+        </p>
+
+        <button class="btn-investidor">
+            Quero virar investidor 🚀
+        </button>
+    </div>
+</section>
+>
+
+    <!-- LINHA 2 -->
+    <section class="linha">
+
+        <div class="card">
+            <h3>Depósito</h3>
+            <input type="number" id="valor-deposito" placeholder="R$ 0,00">
+            <button onclick="depositar()">Depositar</button>
+        </div>
+
+        <div class="card">
+            <h3>Saque</h3>
+            <input type="number" id="valor-saque" placeholder="R$ 0,00">
+            <button class="danger" onclick="sacar()">Sacar</button>
+        </div>
+
+        <div class="card">
+            <h3>Extrato</h3>
+            <div id="extrato" class="extrato"></div>
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

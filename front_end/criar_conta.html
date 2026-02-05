@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Conta - Py Invest</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1 class="logo">
+            <span class="py">Py</span> <span class="invest">Invest</span>
+        </h1>
+
+        <p class="subtitle">Crie sua conta digital</p>
+
+        <p id="mensagem" class="mensagem"></p>
+
+        <form id="form-criar-conta" class="form">
+
+            <input
+                type="text"
+                name="nome"
+                placeholder="Nome completo"
+                required
+            >
+
+            <input
+                type="text"
+                name="cpf"
+                placeholder="CPF (apenas números)"
+                inputmode="numeric"
+                pattern="[0-9]{11}"
+                maxlength="11"
+                required
+            >
+
+            <input
+                type="text"
+                name="telefone"
+                placeholder="Telefone (11 dígitos)"
+                inputmode="numeric"
+                pattern="[0-9]{11}"
+                maxlength="11"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                required
+            >
+
+            <input
+                type="password"
+                name="senha"
+                placeholder="Senha"
+                required
+            >
+
+            <input
+                type="password"
+                name="confirmar_senha"
+                placeholder="Confirmar senha"
+                required
+            >
+
+<div class="checkbox-group">
+    <label>
+        <input type="checkbox" id="correntista">
+        Sou correntista
+    </label>
+</div>
+
+<input 
+  type="number"
+  id="saldo_cc"
+  name="saldo_cc"
+  placeholder="R$ 0,00"
+  readonly
+>
+
+            <button type="submit" class="btn primary">
+                Criar Conta
+            </button>
+
+        </form>
+
+        <a href="index.html" class="admin-link">
+            Voltar para início
+        </a>
+    </main>
+
+    <script src="js/criar_conta.js"></script>
+</body>
+</html>

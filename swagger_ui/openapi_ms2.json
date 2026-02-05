@@ -1,0 +1,617 @@
+
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Client Access Service API",
+    "description": "Documentação completa das rotas expostas pelo microserviço client-access-service",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001",
+      "description": "Servidor local do MS2"
+    }
+  ],
+
+  "paths": {
+
+    "/cliente": {
+      "post": {
+        "summary": "Criar cliente",
+        "tags": ["Cliente"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "correntista": { "type": "boolean" },
+                  "saldo_cc": { "type": "number" },
+                  "admin": { "type": "integer" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["nome", "cpf", "email", "telefone", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cliente criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "400": { "description": "Erro de validação" },
+          "500": { "description": "Erro no MS1" }
+        }
+      }
+    },
+
+    "/cliente/{cpf}": {
+      "get": {
+        "summary": "Buscar cliente pelo CPF",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          },
+          "500": {
+            "description": "Erro no MS1"
+          }
+        }
+      },
+
+      "patch": {
+        "summary": "Atualizar cliente pelo CPF",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cliente atualizado",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "400": { "description": "Erro de validação" },
+          "404": { "description": "Cliente não encontrado" },
+          "500": { "description": "Erro ao atualizar no MS1" }
+        }
+      },
+
+      "delete": {
+        "summary": "Deletar cliente pelo CPF",
+        "tags": ["Cliente"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente deletado" },
+          "400": { "description": "Não é possível excluir conta com saldo diferente de zero" },
+          "403": { "description": "Administrador não pode se excluir" },
+          "404": { "description": "Cliente não encontrado" },
+          "500": { "description": "Erro no MS1" }
+        }
+      }
+    },
+
+
+    "/cliente/operacao/{cpf}": {
+      "post": {
+        "summary": "Executar operação de depósito ou saque",
+        "tags": ["Cliente - Operações"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tipo": { 
+                    "type": "string",
+                    "enum": ["saque", "deposito"]
+                  },
+                  "valor": { "type": "number" }
+                },
+                "required": ["tipo", "valor"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "400": { "description": "Erro de validação ou saldo insuficiente" },
+          "404": { "description": "Cliente não encontrado" },
+          "500": { "description": "Erro no MS1" }
+        }
+      }
+    },
+
+    "/cliente/transacoes/{cpf}": {
+      "get": {
+        "summary": "Listar transações do cliente",
+        "tags": ["Cliente - Transações"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de transações do cliente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "type": "object" }
+                }
+              }
+            }
+          },
+          "404": { "description": "Cliente não encontrado" },
+          "500": { "description": "Erro no MS1" }
+        }
+      }
+    },
+
+    "/admin/clientes": {
+      "get": {
+        "summary": "Listar todos os clientes",
+        "tags": ["Admin - Clientes"],
+        "responses": {
+          "200": {
+            "description": "Lista de clientes do MS1",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "type": "object" }
+                }
+              }
+            }
+          },
+          "500": { "description": "MS1 fora do ar" }
+        }
+      }
+    },
+
+    "/admin/clientes/{id_cliente}": {
+      "get": {
+        "summary": "Buscar cliente por ID (ADMIN)",
+        "tags": ["Admin - Clientes"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente encontrado" },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      },
+
+      "patch": {
+        "summary": "Atualizar cliente por ID (ADMIN)",
+        "tags": ["Admin - Clientes"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Cliente atualizado" },
+          "404": { "description": "Cliente não encontrado" },
+          "400": { "description": "Erro de validação" }
+        }
+      },
+
+      "delete": {
+        "summary": "Deletar cliente por ID (ADMIN)",
+        "tags": ["Admin - Clientes"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente deletado" },
+          "404": { "description": "Cliente não encontrado" },
+          "400": { "description": "Erro de regra (saldo diferente de zero)" }
+        }
+      }
+    },
+
+    "/admin/transacoes/{id_cliente}": {
+      "get": {
+        "summary": "Listar transações de cliente (ADMIN)",
+        "tags": ["Admin - Transações"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transações encontradas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "type": "object" }
+                }
+              }
+            }
+          },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      }
+    },
+
+    "/admin/investidores": {
+      "get": {
+        "summary": "Listar todos os investidores",
+        "tags": ["Admin - Investidores"],
+        "responses": {
+          "200": {
+            "description": "Lista de investidores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "type": "object" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/{id_cliente}": {
+      "get": {
+        "summary": "Buscar investidor pelo ID do cliente",
+        "tags": ["Admin - Investidores"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { 
+            "description": "Dados do investidor",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          },
+          "404": { "description": "Investidor não encontrado" }
+        }
+      }
+    },
+
+    "/admin/cliente-investidor/{id_cliente}": {
+      "get": {
+        "summary": "Buscar cliente com informações de investidor",
+        "tags": ["Admin - Investidores"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente + investidor encontrados" },
+          "404": { "description": "Cliente não encontrado ou sem vínculo de investidor" }
+        }
+      }
+    },
+
+    "/admin/promover/{id_cliente}": {
+      "post": {
+        "summary": "Promover cliente a administrador",
+        "tags": ["Admin - Gerenciamento"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Cliente promovido a admin" },
+          "400": { "description": "Cliente já é administrador" },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      }
+    },
+
+    "/admin/remover/{id_cliente}": {
+      "post": {
+        "summary": "Remover acesso de administrador",
+        "tags": ["Admin - Gerenciamento"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Admin removido" },
+          "400": { "description": "Cliente não é admin" },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      }
+    },
+
+    "/admin/alterar-cpf/{id_cliente}": {
+      "post": {
+        "summary": "Alterar CPF de cliente (ADMIN)",
+        "tags": ["Admin - Gerenciamento"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "novo_cpf": { "type": "string" }
+                },
+                "required": ["novo_cpf"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "CPF alterado" },
+          "400": { "description": "CPF inválido ou já cadastrado" },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      }
+    },
+
+    "/admin/clientes/investimentos": {
+      "get": {
+        "summary": "Listar clientes com informações e quantidade de investimentos",
+        "tags": ["Admin - Investimentos"],
+        "responses": {
+          "200": {
+            "description": "Clientes e informações consolidadas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "summary": "Login de cliente",
+        "tags": ["Login / Senha"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["cpf", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          },
+          "401": { "description": "Senha incorreta" },
+          "404": { "description": "Cliente não encontrado" },
+          "500": { "description": "Erro no MS1" }
+        }
+      }
+    },
+
+    "/alterar-senha": {
+      "patch": {
+        "summary": "Alterar senha do cliente",
+        "tags": ["Login / Senha"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "senha_atual": { "type": "string" },
+                  "nova_senha": { "type": "string" }
+                },
+                "required": ["cpf", "senha_atual", "nova_senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Senha alterada" },
+          "400": { "description": "Dados faltando ou inválidos" },
+          "401": { "description": "Senha atual incorreta" },
+          "404": { "description": "Cliente não encontrado" }
+        }
+      }
+  },
+
+  "components": {
+    "schemas": {
+
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "nome": { "type": "string" },
+          "cpf": { "type": "string" },
+          "email": { "type": "string" },
+          "telefone": { "type": "string" },
+          "correntista": { "type": "integer" },
+          "saldo_cc": { "type": "number" },
+          "score_credito": { "type": "number" },
+          "admin": { "type": "integer" }
+        }
+      },
+
+      "Investidor": {
+        "type": "object",
+        "properties": {
+          "id_cliente": { "type": "string" },
+          "perfil_investidor": { "type": "string" },
+          "patrimonio_total": { "type": "number" },
+          "data_cadastro": { "type": "string" }
+        }
+      },
+
+      "Transacao": {
+        "type": "object",
+        "properties": {
+          "id_transacao": { "type": "integer" },
+          "cliente_id": { "type": "string" },
+          "tipo": { "type": "string" },
+          "valor": { "type": "number" },
+          "data": { "type": "string" },
+          "descricao": { "type": "string" }
+        }
+      },
+
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "cpf": { "type": "string" },
+          "senha": { "type": "string" }
+        },
+        "required": ["cpf", "senha"]
+      },
+
+      "AlterarSenhaRequest": {
+        "type": "object",
+        "properties": {
+          "cpf": { "type": "string" },
+          "senha_atual": { "type": "string" },
+          "nova_senha": { "type": "string" }
+        },
+        "required": ["cpf", "senha_atual", "nova_senha"]
+      }
+    }
+  }
+  }}

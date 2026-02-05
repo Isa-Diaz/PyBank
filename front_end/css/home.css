@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+    margin: 0;
+}
+
+.navbar {
+    height: 64px;
+    background: linear-gradient(120deg, #0d6efd, #00b4ff);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 👈 ISSO resolve */
+    padding: 0 32px;
+}
+
+
+.logo span {
+    font-weight: 300;
+}
+
+.home-container {
+    margin-top: 40px;
+}
+
+.linha {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 260px;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+}
+
+.saldo-card h2 {
+    font-size: 32px;
+    color: #0d6efd;
+}
+
+input {
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: #f1f3f6;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+button {
+    height: 40px;
+    border-radius: 12px;
+    border: none;
+    background: #2ecc71;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.danger {
+    background: #ff6b6b;
+}
+
+.extrato {
+    text-align: left;
+    max-height: 160px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.extrato-item {
+    padding: 8px;
+    border-radius: 8px;
+    background: #f5f7fa;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ================= MENU HAMBURGUER ================= */
+
+
+
+
+/* ================= BOTÃO SAIR ================= */
+
+.btn-sair {
+    background: #e74c3c; /* vermelho suave */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.btn-sair:hover {
+    opacity: 0.9;
+}
+.menu-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+.btn-sair-header {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-sair-header:hover {
+    background: rgba(255,255,255,0.15);
+}
+/* ================= MENU HAMBURGUER ================= */
+
+.menu {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    min-width: 220px;
+    display: none;
+    flex-direction: column; /* 🔥 garante formato de lista */
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.menu.active {
+    display: flex;
+}
+
+/* itens do menu */
+.menu button {
+    all: unset;                 /* 🔥 remove estilo global */
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;            /* 👈 mãozinha */
+    width: 100%;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+
+/* hover */
+.menu button:hover {
+    background: #f2f2f2;
+}
+
+/* item perigoso */
+.menu button.danger {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.menu button.danger:hover {
+    background: #fdecea;
+}
+.menu-btn {
+    font-size: 26px;
+    cursor: pointer;
+    color: #fff;
+    user-select: none;
+}
+
+/* remove traço / foco estranho */
+.menu-btn:focus,
+.menu-btn:active {
+    outline: none;
+}
+.investidor-card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.investidor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+}
+/* ====== ÁREA DE INVESTIMENTOS ====== */
+.extras {
+    display: flex;
+    justify-content: center;
+    margin: 48px 0;
+}
+
+.extra-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+}
+
+.investidor-card {
+    text-align: center;
+    cursor: pointer;
+}
+
+.investidor-texto {
+    font-size: 14px;
+    color: #555;
+    margin: 16px 0 20px;
+}
+
+.btn-investidor {
+    background: linear-gradient(120deg, #6f42c1, #845ef7);
+    border: none;
+    color: white;
+    padding: 14px;
+    width: 100%;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-investidor:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}

@@ -1,0 +1,1287 @@
+
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Investment Data Service API",
+    "description": "Documentação completa das rotas do microserviço investment_data_service",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/admin/clientes/id/{cliente_id}": {
+      "get": {
+        "summary": "Buscar cliente por ID",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "email": { "type": "string" },
+                    "telefone": { "type": "string" },
+                    "correntista": { "type": "integer" },
+                    "score_credito": { "type": "number" },
+                    "saldo_cc": { "type": "number" },
+                    "admin": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/cliente/{cliente_id}": {
+      "get": {
+        "summary": "Buscar cliente + investidor pelo ID do cliente",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investidor encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "email": { "type": "string" },
+                    "telefone": { "type": "string" },
+                    "correntista": { "type": "integer" },
+                    "score_credito": { "type": "number" },
+                    "saldo_cc": { "type": "number" },
+                    "admin": { "type": "integer" },
+                    "perfil_investidor": { "type": "string" },
+                    "patrimonio_total": { "type": "number" },
+                    "data_cadastro": { "type": "string", "format": "date" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Investidor não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/id/{investidor_id}": {
+      "get": {
+        "summary": "Buscar investidor por ID do cliente",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "investidor_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investidor encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_cliente": { "type": "string" },
+                    "perfil_investidor": { "type": "string" },
+                    "patrimonio_total": { "type": "number" },
+                    "data_cadastro": { "type": "string", "format": "date" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Investidor não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/clientes/id/{id}": {
+      "patch": {
+        "summary": "Atualizar dados de um cliente",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "correntista": { "type": "integer" },
+                  "score_credito": { "type": "number" },
+                  "saldo_cc": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cliente atualizado",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object" }
+              }
+            }
+          },
+          "400": {
+            "description": "CPF, email ou telefone em uso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "erro": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/id/atualiza/{id_cliente}": {
+      "patch": {
+        "summary": "Atualizar dados de investidor",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "perfil_investidor": { "type": "string" },
+                  "patrimonio_total": { "type": "number" },
+                  "data_cadastro": { "type": "string", "format": "date" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Investidor atualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Cliente não é investidor ou erro ao atualizar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "erro": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos/atualiza/{id_investimento}": {
+      "patch": {
+        "summary": "Atualizar investimento",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "tipo_investimento": { "type": "string" },
+                  "valor_investido": { "type": "number" },
+                  "data_aplicacao": { "type": "string" },
+                  "rentabilidade": { "type": "number" },
+                  "ativo": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Investimento atualizado"
+          },
+          "400": {
+            "description": "Erro ao atualizar"
+          },
+          "404": {
+            "description": "Investimento não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/clientes": {
+      "get": {
+        "summary": "Listar todos os clientes",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "Lista de clientes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "nome": { "type": "string" },
+                      "cpf": { "type": "string" },
+                      "email": { "type": "string" },
+                      "telefone": { "type": "string" },
+                      "correntista": { "type": "integer" },
+                      "score_credito": { "type": "number" },
+                      "saldo_cc": { "type": "number" },
+                      "admin": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investidor": {
+      "get": {
+        "summary": "Listar todos os investidores",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "Lista de investidores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id_cliente": { "type": "string" },
+                      "perfil_investidor": { "type": "string" },
+                      "patrimonio_total": { "type": "number" },
+                      "data_cadastro": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos": {
+      "get": {
+        "summary": "Listar todos os investimentos",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "Lista de investimentos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "cliente_id": { "type": "string" },
+                      "tipo_investimento": { "type": "string" },
+                      "valor_investido": { "type": "number" },
+                      "data_aplicacao": { "type": "string" },
+                      "rentabilidade": { "type": "number" },
+                      "ativo": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/transacoes/{id_cliente}": {
+      "get": {
+        "summary": "Listar transações de um cliente",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transações encontradas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id_transacao": { "type": "integer" },
+                      "cliente_id": { "type": "string" },
+                      "tipo": { "type": "string" },
+                      "valor": { "type": "number" },
+                      "data": { "type": "string" },
+                      "descricao": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/clientes/delete/id/{id}": {
+      "delete": {
+        "summary": "Deletar cliente pelo ID",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente deletado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investimento/id/{id_investimento}": {
+      "get": {
+        "summary": "Buscar investimento por ID",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investimento encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_investimento": { "type": "integer" },
+                    "cliente_id": { "type": "string" },
+                    "tipo_investimento": { "type": "string" },
+                    "valor_investido": { "type": "number" },
+                    "data_aplicacao": { "type": "string" },
+                    "rentabilidade": { "type": "number" },
+                    "ativo": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Investimento não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "erro": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/clientes": {
+      "post": {
+        "summary": "Criar cliente",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "correntista": { "type": "integer" },
+                  "score_credito": { "type": "number" },
+                  "saldo_cc": { "type": "number" },
+                  "admin": { "type": "integer" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["cpf", "email", "telefone", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cliente criado"
+          },
+          "400": {
+            "description": "Dados duplicados (CPF, email, telefone)"
+          }
+        }
+      }
+    },
+
+    "/clientes/transacao": {
+      "post": {
+        "summary": "Criar transação para cliente",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "tipo": { 
+                    "type": "string",
+                    "enum": ["deposito", "saque", "transferencia", "investimento", "ajuste"]
+                  },
+                  "valor": { "type": "number" },
+                  "descricao": { "type": "string" }
+                },
+                "required": ["cliente_id", "tipo", "valor"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transação criada"
+          },
+          "400": {
+            "description": "Cliente não existe ou dados inválidos"
+          }
+        }
+      }
+    },
+
+    "/clientes/buscar/cpf/{cpf}": {
+      "get": {
+        "summary": "Buscar cliente pelo CPF",
+        "tags": ["Clientes"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/clientes/buscar/telefone/{telefone}": {
+      "get": {
+        "summary": "Buscar cliente pelo telefone",
+        "tags": ["Clientes"],
+        "parameters": [
+          {
+            "name": "telefone",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/clientes/buscar/email/{email}": {
+      "get": {
+        "summary": "Buscar cliente pelo e-mail",
+        "tags": ["Clientes"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/clientes/cpf/atualiza/{cpf}": {
+      "patch": {
+        "summary": "Atualizar cliente pelo CPF",
+        "tags": ["Clientes"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cpf": { "type": "string" },
+                  "email": { "type": "string" },
+                  "telefone": { "type": "string" },
+                  "correntista": { "type": "integer" },
+                  "score_credito": { "type": "number" },
+                  "saldo_cc": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cliente atualizado com sucesso"
+          },
+          "400": {
+            "description": "CPF, email ou telefone já cadastrados"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/clientes/delete/cpf/{cpf}": {
+      "delete": {
+        "summary": "Deletar cliente pelo CPF",
+        "tags": ["Clientes"],
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente deletado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sucesso": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/clientes/login": {
+      "post": {
+        "summary": "Login de cliente",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "senha": { "type": "string" }
+                },
+                "required": ["cpf", "senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login efetuado"
+          },
+          "400": {
+            "description": "Campos faltando"
+          },
+          "401": {
+            "description": "CPF ou senha incorretos"
+          }
+        }
+      }
+    },
+
+    "/clientes/alterar-senha": {
+      "patch": {
+        "summary": "Alterar senha do cliente",
+        "tags": ["Clientes"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpf": { "type": "string" },
+                  "senha_atual": { "type": "string" },
+                  "nova_senha": { "type": "string" }
+                },
+                "required": ["cpf", "senha_atual", "nova_senha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Senha alterada com sucesso"
+          },
+          "400": {
+            "description": "Campos obrigatórios não enviados"
+          },
+          "401": {
+            "description": "Senha atual incorreta"
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/{id_cliente}": {
+      "post": {
+        "summary": "Criar investidor para um cliente",
+        "tags": ["Investidor"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "perfil_investidor": { "type": "string" },
+                  "patrimonio_total": { "type": "number" },
+                  "data_cadastro": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Investidor criado"
+          },
+          "400": {
+            "description": "Cliente já é investidor"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos": {
+      "post": {
+        "summary": "Criar investimento",
+        "tags": ["Investimentos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "tipo_investimento": { "type": "string" },
+                  "valor_investido": { "type": "number" },
+                  "data_aplicacao": { "type": "string" },
+                  "rentabilidade": { "type": "number" },
+                  "ativo": { "type": "integer" }
+                },
+                "required": ["cliente_id", "tipo_investimento", "valor_investido"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Investimento criado"
+          },
+          "404": {
+            "description": "Cliente não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos/{id_cliente}": {
+      "get": {
+        "summary": "Listar investimentos de um cliente",
+        "tags": ["Investimentos"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de investimentos"
+          }
+        }
+      }
+    },
+
+    "/admin/investidor/{id_cliente}": {
+      "get": {
+        "summary": "Buscar investidor pelo ID do cliente",
+        "tags": ["Investidor"],
+        "parameters": [
+          {
+            "name": "id_cliente",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investidor encontrado"
+          },
+          "404": {
+            "description": "Investidor não encontrado"
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos": {
+      "get": {
+        "summary": "Listar todos os investimentos",
+        "tags": ["Investimentos"],
+        "responses": {
+          "200": {
+            "description": "Lista completa de investimentos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id_investimento": { "type": "integer" },
+                      "cliente_id": { "type": "string" },
+                      "tipo_investimento": { "type": "string" },
+                      "valor_investido": { "type": "number" },
+                      "data_aplicacao": { "type": "string" },
+                      "rentabilidade": { "type": "number" },
+                      "ativo": { "type": "integer" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/admin/investimentos/{id_investimento}": {
+      "patch": {
+        "summary": "Atualizar investimento",
+        "tags": ["Investimentos"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "tipo_investimento": { "type": "string" },
+                  "valor_investido": { "type": "number" },
+                  "data_aplicacao": { "type": "string" },
+                  "rentabilidade": { "type": "number" },
+                  "ativo": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Investimento atualizado" },
+          "404": { "description": "Investimento não encontrado" }
+        }
+      },
+
+      "delete": {
+        "summary": "Deletar investimento",
+        "tags": ["Investimentos"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Investimento deletado" },
+          "404": { "description": "Investimento não encontrado" }
+        }
+      }
+    },
+
+    "/api/acoes": {
+      "post": {
+        "summary": "Criar investimento de ação",
+        "tags": ["API Ações"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "ticker": { "type": "string" },
+                  "quantidade": { "type": "number" },
+                  "preco_unitario": { "type": "number" },
+                  "custo_total": { "type": "number" }
+                },
+                "required": ["cliente_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Investimento criado"
+          },
+          "400": {
+            "description": "cliente_id ausente"
+          }
+        }
+      }
+    },
+
+    "/api/acoes/cliente/{cliente_id}": {
+      "get": {
+        "summary": "Listar ações de um cliente",
+        "tags": ["API Ações"],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de ações do cliente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id_investimento": { "type": "integer" },
+                      "cliente_id": { "type": "string" },
+                      "ticker": { "type": "string" },
+                      "quantidade": { "type": "number" },
+                      "preco_unitario": { "type": "number" },
+                      "custo_total": { "type": "number" },
+                      "data": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/acoes/{id_investimento}": {
+      "get": {
+        "summary": "Buscar ação por ID",
+        "tags": ["API Ações"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ação encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_investimento": { "type": "integer" },
+                    "cliente_id": { "type": "string" },
+                    "ticker": { "type": "string" },
+                    "quantidade": { "type": "number" },
+                    "preco_unitario": { "type": "number" },
+                    "custo_total": { "type": "number" },
+                    "data": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Investimento não encontrado"
+          }
+        }
+      },
+
+      "patch": {
+        "summary": "Atualizar investimento de ação",
+        "tags": ["API Ações"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quantidade": { "type": "number" },
+                  "custo_total": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Investimento atualizado"
+          }
+        }
+      },
+
+      "delete": {
+        "summary": "Deletar investimento de ação",
+        "tags": ["API Ações"],
+        "parameters": [
+          {
+            "name": "id_investimento",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Investimento excluído com sucesso"
+          }
+        }
+      }
+    },
+
+    "/api/acoes/transacao": {
+      "post": {
+        "summary": "Registrar operação de compra/venda",
+        "tags": ["API Ações"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": { "type": "string" },
+                  "ticker": { "type": "string" },
+                  "tipo": { 
+                    "type": "string",
+                    "enum": ["compra", "venda"]
+                  },
+                  "quantidade": { "type": "number" },
+                  "preco_unitario": { "type": "number" },
+                  "custo_total": { "type": "number" }
+                },
+                "required": ["cliente_id", "ticker", "tipo", "quantidade", "preco_unitario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operação registrada"
+          }
+        }
+      }
+    }
+
+  },  
+
+  "components": {
+    "schemas": {
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "nome": { "type": "string" },
+          "cpf": { "type": "string" },
+          "email": { "type": "string" },
+          "telefone": { "type": "string" },
+          "correntista": { "type": "integer" },
+          "score_credito": { "type": "number" },
+          "saldo_cc": { "type": "number" },
+          "admin": { "type": "integer" }
+        }
+      },
+      "Investidor": {
+        "type": "object",
+        "properties": {
+          "id_cliente": { "type": "string" },
+          "perfil_investidor": { "type": "string" },
+          "patrimonio_total": { "type": "number" },
+          "data_cadastro": { "type": "string" }
+        }
+      },
+      "Investimento": {
+        "type": "object",
+        "properties": {
+          "id_investimento": { "type": "integer" },
+          "cliente_id": { "type": "string" },
+          "tipo_investimento": { "type": "string" },
+          "valor_investido": { "type": "number" },
+          "data_aplicacao": { "type": "string" },
+          "rentabilidade": { "type": "number" },
+          "ativo": { "type": "integer" }
+        }
+      },
+      "Acao": {
+        "type": "object",
+        "properties": {
+          "id_investimento": { "type": "integer" },
+          "cliente_id": { "type": "string" },
+          "ticker": { "type": "string" },
+          "quantidade": { "type": "number" },
+          "preco_unitario": { "type": "number" },
+          "custo_total": { "type": "number" },
+          "data": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Novo Investimento - PyInvest</title>
+  <link rel="stylesheet" href="css/investimento_fixo_criar.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1 class="logo">Py<span>Invest</span></h1>
+</header>
+
+<main class="container">
+
+  <div class="card">
+
+    <h2>Novo Investimento Fixo</h2>
+
+    <form id="form-investimento">
+
+      <input
+        type="text"
+        id="cpf"
+        placeholder="CPF"
+        readonly
+      >
+
+      <input
+        type="number"
+        id="valor"
+        placeholder="Valor do investimento (R$)"
+        min="1"
+        step="0.01"
+        required
+      >
+
+      <button type="submit" class="btn-criar">
+        Criar investimento
+      </button>
+
+    </form>
+
+    <p id="mensagem" class="mensagem"></p>
+
+    <button class="btn-voltar" onclick="voltarHome()">
+      ⬅ Voltar
+    </button>
+
+  </div>
+
+</main>
+
+<script src="js/investimento_fixo_criar.js"></script>
+</body>
+</html>

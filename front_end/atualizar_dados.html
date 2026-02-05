@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualizar Dados</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/atualizar.css">
+    <script src="js/atualizar_dados.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">Py<span>Invest</span></h1>
+    <div class="menu-container">
+        <button class="btn-sair-header" onclick="voltar()">Voltar</button>
+    </div>
+</header>
+
+<main class="home-container">
+    <section class="linha">
+        <div class="card">
+            <h3>Atualizar dados</h3>
+
+            <input type="text" id="nome" placeholder="Nome">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="telefone" placeholder="Telefone">
+
+            <label style="text-align:left">
+                <input type="checkbox" id="correntista">
+                Correntista
+            </label>
+
+            <button onclick="atualizar()">Salvar alterações</button>
+
+      <p id="msg"></p>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

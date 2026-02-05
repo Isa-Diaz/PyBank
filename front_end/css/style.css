@@ -1,0 +1,228 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #007bff, #00c6ff);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CONTAINER */
+.container {
+    background-color: #ffffff;
+    width: 360px;
+    padding: 35px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGO */
+.logo {
+    font-size: 2.2rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* SUBTÍTULO */
+.subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* BOTÕES */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn.primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.btn.primary:hover {
+    background-color: #0056b3;
+}
+
+.btn.secondary {
+    background-color: #e9f2ff;
+    color: #007bff;
+}
+
+.btn.secondary:hover {
+    background-color: #dbe9ff;
+}
+
+/* LINK ADMIN */
+.admin-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.admin-link:hover {
+    color: #153579;
+}
+.logo {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #007bff; /* azul principal */
+}
+
+.logo span {
+    color: #4290f6; /* azul mais claro para Invest */
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #007bff, #00c6ff);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   CONTAINER BASE
+========================= */
+.container {
+    background-color: #ffffff;
+    width: 360px;
+    padding: 35px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   LOGO
+========================= */
+.logo {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #007bff;
+}
+
+.logo span {
+    color: #7dd3fc;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* =========================
+   AÇÕES / BOTÕES
+========================= */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn.primary {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.btn.primary:hover {
+    background-color: #0056b3;
+}
+
+.btn.secondary {
+    background-color: #e9f2ff;
+    color: #007bff;
+}
+
+.btn.secondary:hover {
+    background-color: #dbe9ff;
+}
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* =========================
+   LINKS SECUNDÁRIOS
+========================= */
+.admin-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.admin-link:hover {
+    color: #111827;
+}

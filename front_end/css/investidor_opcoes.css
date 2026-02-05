@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  margin: 0;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  height: 64px;
+  background: linear-gradient(120deg, #0d6efd, #00b4ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+}
+
+.logo span {
+  font-weight: 300;
+}
+
+/* ===== CONTEÚDO ===== */
+.home-container {
+  margin-top: 80px;
+}
+
+.linha {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: 360px;
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.investidor-texto {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ===== BOTÕES ===== */
+button {
+  height: 42px;
+  border-radius: 14px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Roxo - criar conta */
+.btn-investidor {
+  background: linear-gradient(120deg, #6f42c1, #845ef7);
+  color: white;
+}
+
+/* Verde - acessar carteira */
+.btn-acessar {
+  background: #2ecc71;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.95;
+}

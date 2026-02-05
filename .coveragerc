@@ -1,0 +1,7 @@
+[run]
+omit =
+    client_access_service/controller/*
+    client_access_service/service/adm_service_access.py
+    client_access_service/client/core.py
+    client_access_service/client/client_access.py
+    client_access_service/client/adm_access.py

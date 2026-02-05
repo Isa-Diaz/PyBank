@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Área do Investidor - PyInvest</title>
+  <link rel="stylesheet" href="css/investidor_opcoes.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1 class="logo">Py<span>Invest</span></h1>
+</header>
+
+<main class="home-container">
+
+  <section class="linha">
+
+    <div class="card investidor-card">
+      <h3>Área de Investimentos</h3>
+
+      <p class="investidor-texto">
+        Crie sua conta investidora ou acesse sua carteira de investimentos.
+      </p>
+
+      <button class="btn-investidor" onclick="criarConta()">
+        Criar conta investidora 🚀
+      </button>
+
+      <button class="btn-acessar" onclick="acessarCarteira()">
+        Acessar carteira 📈
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  function criarConta() {
+    window.location.href = "investidor_criar.html";
+  }
+
+  function acessarCarteira() {
+    window.location.href = "login_investidor.html";
+  }
+</script>
+
+</body>
+</html>
