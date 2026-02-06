@@ -73,7 +73,7 @@ cd PyBank
 Crie e ative o ambiente virtual:
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 
 # Linux / Mac
 source venv/bin/activate
@@ -81,6 +81,17 @@ source venv/bin/activate
 # Windows
 venv\Scripts\activate
 ```
+Instale as bibliotecas:
+
+python -m pip install flask-cors
+
+python -m pip install yfinance
+
+python -m pip install matplotlib
+
+python -m pip install seaborn
+
+
 
 Instale as dependências:
 
@@ -113,7 +124,7 @@ http://localhost:5000
 Responsável pelo cadastro, autenticação e gerenciamento de usuários/clientes na conta corrente.
 
 ```bash
-python -m client_access_service.app
+python -m client_access_service.controller.controller_access
 ```
 
 Executa em:

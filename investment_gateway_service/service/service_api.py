@@ -10,9 +10,7 @@ from ..client.client_invest import (
 )
 
 
-# ================================
-# NORMALIZAR TICKER
-# ================================
+
 def normalizar_ticker(ticker):
     ticker = ticker.upper()
 
@@ -22,9 +20,8 @@ def normalizar_ticker(ticker):
     return ticker
 
 
-# ================================
-# RENTABILIDADE HISTÓRICA
-# ================================
+
+
 def calcular_rentabilidade_historica(historico):
     preco_inicial = round(historico[0], 2)
     preco_final = round(historico[-1], 2)
